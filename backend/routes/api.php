@@ -16,7 +16,11 @@ Route::prefix('v1') -> group(function () {
     // Roles and Permissions Management
     Route::middleware(['auth:sanctum','role:admin'])->group(function () {
         Route::get('/roles', [RoleController::class, 'all']);
+        Route::post('/roles', [RoleController::class, 'store']);
+
         Route::get('/permissions', [PermissionController::class, 'all']);
+        Route::post('/permissions', [PermissionController::class, 'store']);
+        Route::delete('/permissions/{permission}', [PermissionController::class, 'destroy']);
     });
 
     // User Management Routes
