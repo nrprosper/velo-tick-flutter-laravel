@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\PermissionController;
 use App\Http\Controllers\Auth\RoleController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BusController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -40,6 +41,16 @@ Route::prefix('v1') -> group(function () {
         Route::post('/change-password', [AuthController::class, 'changePassword'])->middleware('auth:sanctum');
         Route::get('/me', [AuthController::class, 'me'])->middleware('auth:sanctum');
         Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+    });
+
+
+    // Bus Management Routes
+    Route::middleware(['auth:sanctum'])->group(function () {
+        Route::post('/buses', [BusController::class, 'store']);
+        Route::get('/buses', [BusController::class, 'all']);
+        Route::get('/buses/{bus}', [BusController::class, 'one']);
+        Route::delete('/buses/{bus}', [BusController::class, 'destroy']);
+        Route::patch('/buses/{bus}', [BusController::class, 'update']);
     });
 
 });
