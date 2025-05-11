@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\PermissionController;
 use App\Http\Controllers\Auth\RoleController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BusController;
+use App\Http\Controllers\RouteController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -51,6 +52,16 @@ Route::prefix('v1') -> group(function () {
         Route::get('/buses/{bus}', [BusController::class, 'one']);
         Route::delete('/buses/{bus}', [BusController::class, 'destroy']);
         Route::patch('/buses/{bus}', [BusController::class, 'update']);
+    });
+
+
+    // Routes Management endpoints
+    Route::middleware(['auth:sanctum'])->group(function () {
+        Route::post('/routes', [RouteController::class, 'store']);
+        Route::get('/routes', [RouteController::class, 'all']);
+        Route::get('/routes/{route}', [RouteController::class, 'one']);
+        Route::patch('/routes/{route}', [RouteController::class, 'update']);
+        Route::delete('/routes/{route}', [RouteController::class, 'destroy']);
     });
 
 });
