@@ -47,6 +47,7 @@ class BusController extends Controller
 
     public function one(Bus $bus): JsonResponse
     {
+        $bus->load('seats');
         return response()->json($bus);
     }
 
