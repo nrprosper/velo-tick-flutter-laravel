@@ -11,8 +11,16 @@ FROM php:8.2-apache AS final
 
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
-COPY --from=deps app/vendor/ /var/www/html/vendor
+# Update Apache DocumentRoot to /var/www/html/public
+RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|' /etc/apache2/sites-available/000-default.conf
 
-COPY ./ /var/www/html
+# Enable the rewrite module for Laravel routing
+RUN a2enmod rewrite
+
+# Copy dependencies and set ownership to www-data
+COPY --from=deps --chown=www-data:www-data app/vendor/ /var/www/html/vendor
+
+# Copy application files and set ownership to www-data
+COPY --chown=www-data:www-data ./ /var/www/html
 
 USER www-data
