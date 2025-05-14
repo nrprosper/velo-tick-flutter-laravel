@@ -61,7 +61,7 @@ jobs:
       - name: Download build artifact
         uses: actions/download-artifact@v4
         with:
-          name: laravel-backend
+          name: velotick-backend
           path: backend
 
       # Login to Docker Hub
