@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class PermissionController extends Controller
@@ -25,7 +27,10 @@ class PermissionController extends Controller
     }
 
     public function destroy(Request $request, Permission $permission): JsonResponse {
-        $permission->roles()->detach();
+        $roles = Role::all();
+        foreach ($roles as $role) {
+            $role->revokePermissionTo($permission);
+        }
 
         $permission->delete();
 

@@ -25,7 +25,6 @@ return [
          */
 
         'role' => Spatie\Permission\Models\Role::class,
-        'user' => App\Models\User::class,
 
     ],
 

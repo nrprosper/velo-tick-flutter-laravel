@@ -45,37 +45,16 @@ class AuthController extends Controller
             'password' => 'required|string'
         ]);
 
-        $user = User::with(['roles', 'permissions'])
-            ->where('email', $credentials['email'])
-            ->first();
+        $user = User::where('email', $request->email)->first();
 
-        if (! $user || ! Hash::check($credentials['password'], $user->password)) {
+        if (! $user || ! Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
                 'email' => ['The provided credentials are incorrect.'],
             ]);
         }
 
         $token = $user->createToken('sanctum_auth_token')->plainTextToken;
-
-        $userData = collect($user->toArray())
-            ->except([
-                'password',
-                'email',
-                'created_at',
-                'updated_at',
-                'remember_token',
-                'password_reset_token',
-                'password_reset_expirery',
-            ])
-            ->merge([
-                'roles'       => $user->getRoleNames(),
-                'permissions' => $user->getAllPermissions()->pluck('name'),
-            ]);
-
-        return response()->json([
-            'token' => $token,
-            'user'  => $userData,
-        ]);
+        return response()->json(['token' => $token]);
 
     }
 
