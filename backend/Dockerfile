@@ -17,6 +17,9 @@ RUN sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|' /et
 # Enable the rewrite module for Laravel routing
 RUN a2enmod rewrite
 
+# Install the pdo_mysql extension
+RUN docker-php-ext-install pdo_mysql
+
 # Copy dependencies and set ownership to www-data
 COPY --from=deps --chown=www-data:www-data app/vendor/ /var/www/html/vendor
 
