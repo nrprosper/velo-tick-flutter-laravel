@@ -1,6 +1,32 @@
 services:
-  server:
-    build:
-      context: .
+#  server:
+#    build:
+#      context: .
+#    ports:
+#      - "8000:80"
+#    depends_on:
+#      - mysql
+
+  mysql:
+    image: mysql:8.2
     ports:
-      - 8000:80
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: mine123@#
+      MYSQL_DATABASE: velotick
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: mine123@#
+    depends_on:
+      - mysql
+
+volumes:
+  mysql_data:
