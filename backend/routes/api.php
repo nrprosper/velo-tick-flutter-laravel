@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BusController;
 use App\Http\Controllers\RouteController;
 use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -73,6 +74,13 @@ Route::prefix('v1') -> group(function () {
         Route::get('/schedules/{schedule}', [ScheduleController::class, 'one']);
         Route::patch('/schedules/{schedule}', [ScheduleController::class, 'update']);
         Route::delete('/schedules/{schedule}', [ScheduleController::class, 'destroy']);
+    });
+
+
+    Route::middleware(['auth:sanctum'])->group(function () {
+        Route::post('/tickets/buy', [TicketController::class, 'buyTicket']);
+        Route::get('/tickets/mytickets', [TicketController::class, 'myTickets']);
+        Route::delete('/tickets/{ticket}', [TicketController::class, 'destroy']);
     });
 
 });
