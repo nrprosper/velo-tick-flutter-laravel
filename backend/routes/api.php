@@ -31,6 +31,7 @@ Route::prefix('v1') -> group(function () {
     Route::middleware(['auth:sanctum'])->group(function () {
         Route::post('/users', [UserController::class, 'store']);
         Route::get('/users', [UserController::class, 'all']);
+        Route::get('/users/role-stats', [UserController::class, 'roleStats']);
         Route::get('/users/{user}', [UserController::class, 'one']);
         Route::delete('/users/{user}', [UserController::class, 'destroy']);
         Route::patch('/users/{user}', [UserController::class, 'update']);
@@ -78,6 +79,7 @@ Route::prefix('v1') -> group(function () {
 
 
     Route::middleware(['auth:sanctum'])->group(function () {
+        Route::get('/tickets', [TicketController::class, 'all']);
         Route::post('/tickets/buy', [TicketController::class, 'buyTicket']);
         Route::get('/tickets/mytickets', [TicketController::class, 'myTickets']);
         Route::delete('/tickets/{ticket}', [TicketController::class, 'destroy']);
