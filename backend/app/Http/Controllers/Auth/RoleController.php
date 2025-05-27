@@ -23,7 +23,10 @@ class RoleController extends Controller
 
         $permissionsID = array_map('intval', $request->input('permission'));
 
-        $role = Role::create(['name' => $request->input('name')]);
+        $role = Role::create([
+            'name' => $request->input('name'),
+            'guard_name' => 'api',
+        ]);
         $role->syncPermissions($permissionsID);
 
         return  $role->toResource();
