@@ -11,6 +11,7 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -96,5 +97,46 @@ class UserController extends Controller
 
 
     }
+
+
+    public function roleStats(): JsonResponse
+    {
+        $baseRoles = ['admin', 'manager', 'verifier'];
+        $allRoles = Role::pluck('name')->toArray();
+        $uniqueRoles = array_unique(array_merge($baseRoles, $allRoles));
+
+        $stats = collect($uniqueRoles)->map(function ($role) {
+            $count = 0;
+
+            if (Role::where('name', $role)->where('guard_name', 'api')->exists()) {
+                $count = User::role($role)->count();
+            }
+
+            $description = strtolower($role) === 'user'
+                ? 'Clients of the company'
+                : ucfirst($role) . 's of the company';
+
+            return [
+                'title' => ucfirst($role),
+                'value' => $count,
+                'description' => $description,
+                'color' => $this->getColorForRole($role),
+            ];
+        });
+
+
+        return response()->json($stats->values());
+    }
+
+    private function getColorForRole(string $role): string
+    {
+        return match(strtolower($role)) {
+            'admin' => 'indigo',
+            'manager' => 'green',
+            'verifier' => 'orange',
+            default => 'blue',
+        };
+    }
+
 
 }
