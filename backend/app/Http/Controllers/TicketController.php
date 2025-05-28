@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\AllTicketsResource;
 use App\Http\Resources\MyTicketResourse;
+use App\Mail\TicketEmail;
 use App\Models\SeatAvailability;
 use App\Models\Ticket;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
@@ -12,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class TicketController extends Controller
@@ -83,6 +85,8 @@ class TicketController extends Controller
             $ticket->save();
 
             DB::commit();
+            $emailTicket = (new MyTicketResourse($ticket))->toArray(request());
+            Mail::to($user->email)->send(new TicketEmail($emailTicket));
             return response()->json($ticket);
         } catch (\Exception $e) {
             DB::rollBack();

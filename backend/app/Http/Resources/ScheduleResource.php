@@ -18,6 +18,7 @@ class ScheduleResource extends JsonResource
             'id' => $this->id,
             'bus' => $this->bus->plate_number,
             'origin' => $this->route->origin,
+            'price' => $this->route->price,
             'destination' => $this->route->destination,
             'departure_time' => $this->departure_time,
             'arrival_time' => $this->arrival_time,

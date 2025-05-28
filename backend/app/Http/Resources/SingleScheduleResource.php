@@ -22,6 +22,7 @@ class SingleScheduleResource extends JsonResource
             'departure_time' => $this->departure_time,
             'arrival_time' => $this->arrival_time,
             'total_seats' => $this->bus->seats->count(),
+            'price' => $this->route->price,
             'available_seats' => $this->seatAvailabilities->where('is_booked', false)->count(),
             'availabilities' => $this->seatAvailabilities->map(function ($seatAvailability) {
                 return [
