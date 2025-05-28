@@ -8,6 +8,8 @@ use App\Http\Controllers\RouteController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\UserController;
+use App\Mail\TrialEmail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 
@@ -52,6 +54,7 @@ Route::prefix('v1') -> group(function () {
     Route::middleware(['auth:sanctum'])->group(function () {
         Route::post('/buses', [BusController::class, 'store']);
         Route::get('/buses', [BusController::class, 'all']);
+        Route::get('/buses/stats', [BusController::class, 'busStatusStats']);
         Route::get('/buses/{bus}', [BusController::class, 'one']);
         Route::delete('/buses/{bus}', [BusController::class, 'destroy']);
         Route::patch('/buses/{bus}', [BusController::class, 'update']);
@@ -71,7 +74,6 @@ Route::prefix('v1') -> group(function () {
     // Schedule Management Routes
     Route::middleware(['auth:sanctum'])->group(function () {
         Route::post('/schedules', [ScheduleController::class, 'store']);
-        Route::get('/schedules', [ScheduleController::class, 'all']);
         Route::get('/schedules/{schedule}', [ScheduleController::class, 'one']);
         Route::patch('/schedules/{schedule}', [ScheduleController::class, 'update']);
         Route::delete('/schedules/{schedule}', [ScheduleController::class, 'destroy']);
@@ -84,5 +86,7 @@ Route::prefix('v1') -> group(function () {
         Route::get('/tickets/mytickets', [TicketController::class, 'myTickets']);
         Route::delete('/tickets/{ticket}', [TicketController::class, 'destroy']);
     });
+
+    Route::get('/schedules', [ScheduleController::class, 'all']);
 
 });
