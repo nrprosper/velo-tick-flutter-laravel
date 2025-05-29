@@ -33,14 +33,8 @@ class _HomeSearchState extends State<HomeSearch> {
         SizedBox(
           width: double.infinity,
           child: Card(
-            elevation: 0,
-            color: Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-              side: BorderSide(color: DColors.neutral2),
-            ),
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12),
               child: Stack(
                 alignment: Alignment.centerRight,
                 children: [
@@ -61,7 +55,6 @@ class _HomeSearchState extends State<HomeSearch> {
                           onChanged: (val) => setState(() => _to = val),
                           items: _cities,
                         ),
-                        const SizedBox(height: 12),
                       ],
                     ),
                   ),
@@ -100,7 +93,7 @@ class _HomeSearchState extends State<HomeSearch> {
                 DColors.primary6,
               ),
             ),
-            child: Text("Search"),
+            child: Text("Search Buses"),
           ),
         )
       ],
