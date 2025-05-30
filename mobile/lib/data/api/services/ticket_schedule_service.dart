@@ -16,7 +16,7 @@ class TicketScheduleService {
 
 
   Future<MyTicketResponse> myTickets() {
-    return _dio.get('tickets/mytickets').then((res) {
+    return _dio.get('/tickets/mytickets').then((res) {
       return MyTicketResponse.fromJson(res.data);
     });
   }

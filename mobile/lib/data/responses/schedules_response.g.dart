@@ -12,12 +12,12 @@ _Schedule _$ScheduleFromJson(Map<String, dynamic> json) => _Schedule(
   origin: json['origin'] as String,
   price: json['price'] as String,
   destination: json['destination'] as String,
-  departureTime: DateTime.parse(json['departureTime'] as String),
-  arrivalTime: DateTime.parse(json['arrivalTime'] as String),
-  totalSeats: (json['totalSeats'] as num).toInt(),
-  availableSeats: (json['availableSeats'] as num).toInt(),
-  createdAt: DateTime.parse(json['createdAt'] as String),
-  updatedAt: DateTime.parse(json['updatedAt'] as String),
+  departureTime: DateTime.parse(json['departure_time'] as String),
+  arrivalTime: DateTime.parse(json['arrival_time'] as String),
+  totalSeats: (json['total_seats'] as num).toInt(),
+  availableSeats: (json['available_seats'] as num).toInt(),
+  createdAt: DateTime.parse(json['created_at'] as String),
+  updatedAt: DateTime.parse(json['updated_at'] as String),
 );
 
 Map<String, dynamic> _$ScheduleToJson(_Schedule instance) => <String, dynamic>{
@@ -26,12 +26,12 @@ Map<String, dynamic> _$ScheduleToJson(_Schedule instance) => <String, dynamic>{
   'origin': instance.origin,
   'price': instance.price,
   'destination': instance.destination,
-  'departureTime': instance.departureTime.toIso8601String(),
-  'arrivalTime': instance.arrivalTime.toIso8601String(),
-  'totalSeats': instance.totalSeats,
-  'availableSeats': instance.availableSeats,
-  'createdAt': instance.createdAt.toIso8601String(),
-  'updatedAt': instance.updatedAt.toIso8601String(),
+  'departure_time': instance.departureTime.toIso8601String(),
+  'arrival_time': instance.arrivalTime.toIso8601String(),
+  'total_seats': instance.totalSeats,
+  'available_seats': instance.availableSeats,
+  'created_at': instance.createdAt.toIso8601String(),
+  'updated_at': instance.updatedAt.toIso8601String(),
 };
 
 _Link _$LinkFromJson(Map<String, dynamic> json) => _Link(

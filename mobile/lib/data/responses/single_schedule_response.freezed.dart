@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SeatAvailability {
 
- int get seatId; String get seatNumber; bool get isBooked;
+@JsonKey(name: "seat_id") int get seatId;@JsonKey(name: "seat_number") String get seatNumber;@JsonKey(name: "is_booked") bool get isBooked;
 /// Create a copy of SeatAvailability
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,7 +49,7 @@ abstract mixin class $SeatAvailabilityCopyWith<$Res>  {
   factory $SeatAvailabilityCopyWith(SeatAvailability value, $Res Function(SeatAvailability) _then) = _$SeatAvailabilityCopyWithImpl;
 @useResult
 $Res call({
- int seatId, String seatNumber, bool isBooked
+@JsonKey(name: "seat_id") int seatId,@JsonKey(name: "seat_number") String seatNumber,@JsonKey(name: "is_booked") bool isBooked
 });
 
 
@@ -82,12 +82,12 @@ as bool,
 @JsonSerializable()
 
 class _SeatAvailability implements SeatAvailability {
-  const _SeatAvailability({required this.seatId, required this.seatNumber, required this.isBooked});
+  const _SeatAvailability({@JsonKey(name: "seat_id") required this.seatId, @JsonKey(name: "seat_number") required this.seatNumber, @JsonKey(name: "is_booked") required this.isBooked});
   factory _SeatAvailability.fromJson(Map<String, dynamic> json) => _$SeatAvailabilityFromJson(json);
 
-@override final  int seatId;
-@override final  String seatNumber;
-@override final  bool isBooked;
+@override@JsonKey(name: "seat_id") final  int seatId;
+@override@JsonKey(name: "seat_number") final  String seatNumber;
+@override@JsonKey(name: "is_booked") final  bool isBooked;
 
 /// Create a copy of SeatAvailability
 /// with the given fields replaced by the non-null parameter values.
@@ -122,7 +122,7 @@ abstract mixin class _$SeatAvailabilityCopyWith<$Res> implements $SeatAvailabili
   factory _$SeatAvailabilityCopyWith(_SeatAvailability value, $Res Function(_SeatAvailability) _then) = __$SeatAvailabilityCopyWithImpl;
 @override @useResult
 $Res call({
- int seatId, String seatNumber, bool isBooked
+@JsonKey(name: "seat_id") int seatId,@JsonKey(name: "seat_number") String seatNumber,@JsonKey(name: "is_booked") bool isBooked
 });
 
 
@@ -155,7 +155,7 @@ as bool,
 /// @nodoc
 mixin _$SingleScheduleResponse {
 
- int get id; String get bus; String get origin; String get destination; DateTime get departureTime; DateTime get arrivalTime; int get totalSeats; String get price; int get availableSeats; List<SeatAvailability> get availabilities; DateTime get createdAt; DateTime get updatedAt;
+ int get id; String get bus; String get origin; String get destination;@JsonKey(name: "departure_time") DateTime get departureTime;@JsonKey(name: "arrival_time") DateTime get arrivalTime;@JsonKey(name: "total_seats") int get totalSeats; String get price;@JsonKey(name: "available_seats") int get availableSeats; List<SeatAvailability> get availabilities;@JsonKey(name: "created_at") DateTime get createdAt;@JsonKey(name: "updated_at") DateTime get updatedAt;
 /// Create a copy of SingleScheduleResponse
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -188,7 +188,7 @@ abstract mixin class $SingleScheduleResponseCopyWith<$Res>  {
   factory $SingleScheduleResponseCopyWith(SingleScheduleResponse value, $Res Function(SingleScheduleResponse) _then) = _$SingleScheduleResponseCopyWithImpl;
 @useResult
 $Res call({
- int id, String bus, String origin, String destination, DateTime departureTime, DateTime arrivalTime, int totalSeats, String price, int availableSeats, List<SeatAvailability> availabilities, DateTime createdAt, DateTime updatedAt
+ int id, String bus, String origin, String destination,@JsonKey(name: "departure_time") DateTime departureTime,@JsonKey(name: "arrival_time") DateTime arrivalTime,@JsonKey(name: "total_seats") int totalSeats, String price,@JsonKey(name: "available_seats") int availableSeats, List<SeatAvailability> availabilities,@JsonKey(name: "created_at") DateTime createdAt,@JsonKey(name: "updated_at") DateTime updatedAt
 });
 
 
@@ -230,18 +230,18 @@ as DateTime,
 @JsonSerializable()
 
 class _SingleScheduleResponse implements SingleScheduleResponse {
-  const _SingleScheduleResponse({required this.id, required this.bus, required this.origin, required this.destination, required this.departureTime, required this.arrivalTime, required this.totalSeats, required this.price, required this.availableSeats, required final  List<SeatAvailability> availabilities, required this.createdAt, required this.updatedAt}): _availabilities = availabilities;
+  const _SingleScheduleResponse({required this.id, required this.bus, required this.origin, required this.destination, @JsonKey(name: "departure_time") required this.departureTime, @JsonKey(name: "arrival_time") required this.arrivalTime, @JsonKey(name: "total_seats") required this.totalSeats, required this.price, @JsonKey(name: "available_seats") required this.availableSeats, required final  List<SeatAvailability> availabilities, @JsonKey(name: "created_at") required this.createdAt, @JsonKey(name: "updated_at") required this.updatedAt}): _availabilities = availabilities;
   factory _SingleScheduleResponse.fromJson(Map<String, dynamic> json) => _$SingleScheduleResponseFromJson(json);
 
 @override final  int id;
 @override final  String bus;
 @override final  String origin;
 @override final  String destination;
-@override final  DateTime departureTime;
-@override final  DateTime arrivalTime;
-@override final  int totalSeats;
+@override@JsonKey(name: "departure_time") final  DateTime departureTime;
+@override@JsonKey(name: "arrival_time") final  DateTime arrivalTime;
+@override@JsonKey(name: "total_seats") final  int totalSeats;
 @override final  String price;
-@override final  int availableSeats;
+@override@JsonKey(name: "available_seats") final  int availableSeats;
  final  List<SeatAvailability> _availabilities;
 @override List<SeatAvailability> get availabilities {
   if (_availabilities is EqualUnmodifiableListView) return _availabilities;
@@ -249,8 +249,8 @@ class _SingleScheduleResponse implements SingleScheduleResponse {
   return EqualUnmodifiableListView(_availabilities);
 }
 
-@override final  DateTime createdAt;
-@override final  DateTime updatedAt;
+@override@JsonKey(name: "created_at") final  DateTime createdAt;
+@override@JsonKey(name: "updated_at") final  DateTime updatedAt;
 
 /// Create a copy of SingleScheduleResponse
 /// with the given fields replaced by the non-null parameter values.
@@ -285,7 +285,7 @@ abstract mixin class _$SingleScheduleResponseCopyWith<$Res> implements $SingleSc
   factory _$SingleScheduleResponseCopyWith(_SingleScheduleResponse value, $Res Function(_SingleScheduleResponse) _then) = __$SingleScheduleResponseCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String bus, String origin, String destination, DateTime departureTime, DateTime arrivalTime, int totalSeats, String price, int availableSeats, List<SeatAvailability> availabilities, DateTime createdAt, DateTime updatedAt
+ int id, String bus, String origin, String destination,@JsonKey(name: "departure_time") DateTime departureTime,@JsonKey(name: "arrival_time") DateTime arrivalTime,@JsonKey(name: "total_seats") int totalSeats, String price,@JsonKey(name: "available_seats") int availableSeats, List<SeatAvailability> availabilities,@JsonKey(name: "created_at") DateTime createdAt,@JsonKey(name: "updated_at") DateTime updatedAt
 });
 
 

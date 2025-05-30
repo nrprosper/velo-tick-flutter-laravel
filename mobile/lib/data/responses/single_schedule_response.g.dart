@@ -8,16 +8,16 @@ part of 'single_schedule_response.dart';
 
 _SeatAvailability _$SeatAvailabilityFromJson(Map<String, dynamic> json) =>
     _SeatAvailability(
-      seatId: (json['seatId'] as num).toInt(),
-      seatNumber: json['seatNumber'] as String,
-      isBooked: json['isBooked'] as bool,
+      seatId: (json['seat_id'] as num).toInt(),
+      seatNumber: json['seat_number'] as String,
+      isBooked: json['is_booked'] as bool,
     );
 
 Map<String, dynamic> _$SeatAvailabilityToJson(_SeatAvailability instance) =>
     <String, dynamic>{
-      'seatId': instance.seatId,
-      'seatNumber': instance.seatNumber,
-      'isBooked': instance.isBooked,
+      'seat_id': instance.seatId,
+      'seat_number': instance.seatNumber,
+      'is_booked': instance.isBooked,
     };
 
 _SingleScheduleResponse _$SingleScheduleResponseFromJson(
@@ -27,17 +27,17 @@ _SingleScheduleResponse _$SingleScheduleResponseFromJson(
   bus: json['bus'] as String,
   origin: json['origin'] as String,
   destination: json['destination'] as String,
-  departureTime: DateTime.parse(json['departureTime'] as String),
-  arrivalTime: DateTime.parse(json['arrivalTime'] as String),
-  totalSeats: (json['totalSeats'] as num).toInt(),
+  departureTime: DateTime.parse(json['departure_time'] as String),
+  arrivalTime: DateTime.parse(json['arrival_time'] as String),
+  totalSeats: (json['total_seats'] as num).toInt(),
   price: json['price'] as String,
-  availableSeats: (json['availableSeats'] as num).toInt(),
+  availableSeats: (json['available_seats'] as num).toInt(),
   availabilities:
       (json['availabilities'] as List<dynamic>)
           .map((e) => SeatAvailability.fromJson(e as Map<String, dynamic>))
           .toList(),
-  createdAt: DateTime.parse(json['createdAt'] as String),
-  updatedAt: DateTime.parse(json['updatedAt'] as String),
+  createdAt: DateTime.parse(json['created_at'] as String),
+  updatedAt: DateTime.parse(json['updated_at'] as String),
 );
 
 Map<String, dynamic> _$SingleScheduleResponseToJson(
@@ -47,12 +47,12 @@ Map<String, dynamic> _$SingleScheduleResponseToJson(
   'bus': instance.bus,
   'origin': instance.origin,
   'destination': instance.destination,
-  'departureTime': instance.departureTime.toIso8601String(),
-  'arrivalTime': instance.arrivalTime.toIso8601String(),
-  'totalSeats': instance.totalSeats,
+  'departure_time': instance.departureTime.toIso8601String(),
+  'arrival_time': instance.arrivalTime.toIso8601String(),
+  'total_seats': instance.totalSeats,
   'price': instance.price,
-  'availableSeats': instance.availableSeats,
+  'available_seats': instance.availableSeats,
   'availabilities': instance.availabilities,
-  'createdAt': instance.createdAt.toIso8601String(),
-  'updatedAt': instance.updatedAt.toIso8601String(),
+  'created_at': instance.createdAt.toIso8601String(),
+  'updated_at': instance.updatedAt.toIso8601String(),
 };

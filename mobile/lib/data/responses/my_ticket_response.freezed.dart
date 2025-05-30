@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Ticket {
 
- int get id; String get origin; String get destination; String get price; String get seatNumber; int get distance; String get travelTime; DateTime get departureTime; DateTime get arrivalTime; String get qrCodeUrl;
+ int get id; String get origin; String get destination; String get price;@JsonKey(name: "seat_number") String get seatNumber; int get distance;@JsonKey(name: "travel_time") String get travelTime;@JsonKey(name: "departure_time") DateTime get departureTime;@JsonKey(name: "arrival_time") DateTime get arrivalTime;@JsonKey(name: "qr_code_url") String get qrCodeUrl;
 /// Create a copy of Ticket
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,7 +49,7 @@ abstract mixin class $TicketCopyWith<$Res>  {
   factory $TicketCopyWith(Ticket value, $Res Function(Ticket) _then) = _$TicketCopyWithImpl;
 @useResult
 $Res call({
- int id, String origin, String destination, String price, String seatNumber, int distance, String travelTime, DateTime departureTime, DateTime arrivalTime, String qrCodeUrl
+ int id, String origin, String destination, String price,@JsonKey(name: "seat_number") String seatNumber, int distance,@JsonKey(name: "travel_time") String travelTime,@JsonKey(name: "departure_time") DateTime departureTime,@JsonKey(name: "arrival_time") DateTime arrivalTime,@JsonKey(name: "qr_code_url") String qrCodeUrl
 });
 
 
@@ -89,19 +89,19 @@ as String,
 @JsonSerializable()
 
 class _Ticket implements Ticket {
-  const _Ticket({required this.id, required this.origin, required this.destination, required this.price, required this.seatNumber, required this.distance, required this.travelTime, required this.departureTime, required this.arrivalTime, required this.qrCodeUrl});
+  const _Ticket({required this.id, required this.origin, required this.destination, required this.price, @JsonKey(name: "seat_number") required this.seatNumber, required this.distance, @JsonKey(name: "travel_time") required this.travelTime, @JsonKey(name: "departure_time") required this.departureTime, @JsonKey(name: "arrival_time") required this.arrivalTime, @JsonKey(name: "qr_code_url") required this.qrCodeUrl});
   factory _Ticket.fromJson(Map<String, dynamic> json) => _$TicketFromJson(json);
 
 @override final  int id;
 @override final  String origin;
 @override final  String destination;
 @override final  String price;
-@override final  String seatNumber;
+@override@JsonKey(name: "seat_number") final  String seatNumber;
 @override final  int distance;
-@override final  String travelTime;
-@override final  DateTime departureTime;
-@override final  DateTime arrivalTime;
-@override final  String qrCodeUrl;
+@override@JsonKey(name: "travel_time") final  String travelTime;
+@override@JsonKey(name: "departure_time") final  DateTime departureTime;
+@override@JsonKey(name: "arrival_time") final  DateTime arrivalTime;
+@override@JsonKey(name: "qr_code_url") final  String qrCodeUrl;
 
 /// Create a copy of Ticket
 /// with the given fields replaced by the non-null parameter values.
@@ -136,7 +136,7 @@ abstract mixin class _$TicketCopyWith<$Res> implements $TicketCopyWith<$Res> {
   factory _$TicketCopyWith(_Ticket value, $Res Function(_Ticket) _then) = __$TicketCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String origin, String destination, String price, String seatNumber, int distance, String travelTime, DateTime departureTime, DateTime arrivalTime, String qrCodeUrl
+ int id, String origin, String destination, String price,@JsonKey(name: "seat_number") String seatNumber, int distance,@JsonKey(name: "travel_time") String travelTime,@JsonKey(name: "departure_time") DateTime departureTime,@JsonKey(name: "arrival_time") DateTime arrivalTime,@JsonKey(name: "qr_code_url") String qrCodeUrl
 });
 
 

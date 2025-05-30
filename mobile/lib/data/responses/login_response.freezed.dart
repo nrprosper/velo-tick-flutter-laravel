@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$User {
 
- int get id; String get firstname; String get lastname; String get phoneNumber; String get nationality; int get emailVerified; DateTime? get emailVerifiedAt; String get profilePicUrl; List<String> get roles; List<String> get permissions;
+ int get id; String get firstname; String get lastname;@JsonKey(name: 'phone_number') String get phoneNumber; String get nationality;@JsonKey(name: 'email_verified') int get emailVerified;@JsonKey(name: 'email_verified_at') DateTime? get emailVerifiedAt;@JsonKey(name: 'profile_pic_url') String get profilePicUrl; List<String> get roles; List<String> get permissions;
 /// Create a copy of User
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,7 +49,7 @@ abstract mixin class $UserCopyWith<$Res>  {
   factory $UserCopyWith(User value, $Res Function(User) _then) = _$UserCopyWithImpl;
 @useResult
 $Res call({
- int id, String firstname, String lastname, String phoneNumber, String nationality, int emailVerified, DateTime? emailVerifiedAt, String profilePicUrl, List<String> roles, List<String> permissions
+ int id, String firstname, String lastname,@JsonKey(name: 'phone_number') String phoneNumber, String nationality,@JsonKey(name: 'email_verified') int emailVerified,@JsonKey(name: 'email_verified_at') DateTime? emailVerifiedAt,@JsonKey(name: 'profile_pic_url') String profilePicUrl, List<String> roles, List<String> permissions
 });
 
 
@@ -89,17 +89,17 @@ as List<String>,
 @JsonSerializable()
 
 class _User implements User {
-  const _User({required this.id, required this.firstname, required this.lastname, required this.phoneNumber, required this.nationality, required this.emailVerified, this.emailVerifiedAt, required this.profilePicUrl, required final  List<String> roles, required final  List<String> permissions}): _roles = roles,_permissions = permissions;
+  const _User({required this.id, required this.firstname, required this.lastname, @JsonKey(name: 'phone_number') required this.phoneNumber, required this.nationality, @JsonKey(name: 'email_verified') required this.emailVerified, @JsonKey(name: 'email_verified_at') this.emailVerifiedAt, @JsonKey(name: 'profile_pic_url') required this.profilePicUrl, required final  List<String> roles, required final  List<String> permissions}): _roles = roles,_permissions = permissions;
   factory _User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
 @override final  int id;
 @override final  String firstname;
 @override final  String lastname;
-@override final  String phoneNumber;
+@override@JsonKey(name: 'phone_number') final  String phoneNumber;
 @override final  String nationality;
-@override final  int emailVerified;
-@override final  DateTime? emailVerifiedAt;
-@override final  String profilePicUrl;
+@override@JsonKey(name: 'email_verified') final  int emailVerified;
+@override@JsonKey(name: 'email_verified_at') final  DateTime? emailVerifiedAt;
+@override@JsonKey(name: 'profile_pic_url') final  String profilePicUrl;
  final  List<String> _roles;
 @override List<String> get roles {
   if (_roles is EqualUnmodifiableListView) return _roles;
@@ -148,7 +148,7 @@ abstract mixin class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   factory _$UserCopyWith(_User value, $Res Function(_User) _then) = __$UserCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String firstname, String lastname, String phoneNumber, String nationality, int emailVerified, DateTime? emailVerifiedAt, String profilePicUrl, List<String> roles, List<String> permissions
+ int id, String firstname, String lastname,@JsonKey(name: 'phone_number') String phoneNumber, String nationality,@JsonKey(name: 'email_verified') int emailVerified,@JsonKey(name: 'email_verified_at') DateTime? emailVerifiedAt,@JsonKey(name: 'profile_pic_url') String profilePicUrl, List<String> roles, List<String> permissions
 });
 
 

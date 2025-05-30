@@ -10,11 +10,16 @@ abstract class Ticket with _$Ticket {
     required String origin,
     required String destination,
     required String price,
+    @JsonKey(name: "seat_number")
     required String seatNumber,
     required int distance,
+    @JsonKey(name: "travel_time")
     required String travelTime,
+    @JsonKey(name: "departure_time")
     required DateTime departureTime,
+    @JsonKey(name: "arrival_time")
     required DateTime arrivalTime,
+    @JsonKey(name: "qr_code_url")
     required String qrCodeUrl,
   }) = _Ticket;
 

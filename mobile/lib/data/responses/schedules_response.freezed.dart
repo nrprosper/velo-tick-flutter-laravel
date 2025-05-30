@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Schedule {
 
- int get id; String get bus; String get origin; String get price; String get destination; DateTime get departureTime; DateTime get arrivalTime; int get totalSeats; int get availableSeats; DateTime get createdAt; DateTime get updatedAt;
+ int get id; String get bus; String get origin; String get price; String get destination;@JsonKey(name: "departure_time") DateTime get departureTime;@JsonKey(name: "arrival_time") DateTime get arrivalTime;@JsonKey(name: "total_seats") int get totalSeats;@JsonKey(name: "available_seats") int get availableSeats;@JsonKey(name: "created_at") DateTime get createdAt;@JsonKey(name: "updated_at") DateTime get updatedAt;
 /// Create a copy of Schedule
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,7 +49,7 @@ abstract mixin class $ScheduleCopyWith<$Res>  {
   factory $ScheduleCopyWith(Schedule value, $Res Function(Schedule) _then) = _$ScheduleCopyWithImpl;
 @useResult
 $Res call({
- int id, String bus, String origin, String price, String destination, DateTime departureTime, DateTime arrivalTime, int totalSeats, int availableSeats, DateTime createdAt, DateTime updatedAt
+ int id, String bus, String origin, String price, String destination,@JsonKey(name: "departure_time") DateTime departureTime,@JsonKey(name: "arrival_time") DateTime arrivalTime,@JsonKey(name: "total_seats") int totalSeats,@JsonKey(name: "available_seats") int availableSeats,@JsonKey(name: "created_at") DateTime createdAt,@JsonKey(name: "updated_at") DateTime updatedAt
 });
 
 
@@ -90,7 +90,7 @@ as DateTime,
 @JsonSerializable()
 
 class _Schedule implements Schedule {
-  const _Schedule({required this.id, required this.bus, required this.origin, required this.price, required this.destination, required this.departureTime, required this.arrivalTime, required this.totalSeats, required this.availableSeats, required this.createdAt, required this.updatedAt});
+  const _Schedule({required this.id, required this.bus, required this.origin, required this.price, required this.destination, @JsonKey(name: "departure_time") required this.departureTime, @JsonKey(name: "arrival_time") required this.arrivalTime, @JsonKey(name: "total_seats") required this.totalSeats, @JsonKey(name: "available_seats") required this.availableSeats, @JsonKey(name: "created_at") required this.createdAt, @JsonKey(name: "updated_at") required this.updatedAt});
   factory _Schedule.fromJson(Map<String, dynamic> json) => _$ScheduleFromJson(json);
 
 @override final  int id;
@@ -98,12 +98,12 @@ class _Schedule implements Schedule {
 @override final  String origin;
 @override final  String price;
 @override final  String destination;
-@override final  DateTime departureTime;
-@override final  DateTime arrivalTime;
-@override final  int totalSeats;
-@override final  int availableSeats;
-@override final  DateTime createdAt;
-@override final  DateTime updatedAt;
+@override@JsonKey(name: "departure_time") final  DateTime departureTime;
+@override@JsonKey(name: "arrival_time") final  DateTime arrivalTime;
+@override@JsonKey(name: "total_seats") final  int totalSeats;
+@override@JsonKey(name: "available_seats") final  int availableSeats;
+@override@JsonKey(name: "created_at") final  DateTime createdAt;
+@override@JsonKey(name: "updated_at") final  DateTime updatedAt;
 
 /// Create a copy of Schedule
 /// with the given fields replaced by the non-null parameter values.
@@ -138,7 +138,7 @@ abstract mixin class _$ScheduleCopyWith<$Res> implements $ScheduleCopyWith<$Res>
   factory _$ScheduleCopyWith(_Schedule value, $Res Function(_Schedule) _then) = __$ScheduleCopyWithImpl;
 @override @useResult
 $Res call({
- int id, String bus, String origin, String price, String destination, DateTime departureTime, DateTime arrivalTime, int totalSeats, int availableSeats, DateTime createdAt, DateTime updatedAt
+ int id, String bus, String origin, String price, String destination,@JsonKey(name: "departure_time") DateTime departureTime,@JsonKey(name: "arrival_time") DateTime arrivalTime,@JsonKey(name: "total_seats") int totalSeats,@JsonKey(name: "available_seats") int availableSeats,@JsonKey(name: "created_at") DateTime createdAt,@JsonKey(name: "updated_at") DateTime updatedAt
 });
 
 

@@ -9,10 +9,14 @@ abstract class User with _$User {
     required int id,
     required String firstname,
     required String lastname,
+    @JsonKey(name: 'phone_number')
     required String phoneNumber,
     required String nationality,
+    @JsonKey(name: 'email_verified')
     required int emailVerified,
+    @JsonKey(name: 'email_verified_at')
     DateTime? emailVerifiedAt,
+    @JsonKey(name: 'profile_pic_url')
     required String profilePicUrl,
     required List<String> roles,
     required List<String> permissions,

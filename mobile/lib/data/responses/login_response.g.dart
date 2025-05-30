@@ -10,14 +10,14 @@ _User _$UserFromJson(Map<String, dynamic> json) => _User(
   id: (json['id'] as num).toInt(),
   firstname: json['firstname'] as String,
   lastname: json['lastname'] as String,
-  phoneNumber: json['phoneNumber'] as String,
+  phoneNumber: json['phone_number'] as String,
   nationality: json['nationality'] as String,
-  emailVerified: (json['emailVerified'] as num).toInt(),
+  emailVerified: (json['email_verified'] as num).toInt(),
   emailVerifiedAt:
-      json['emailVerifiedAt'] == null
+      json['email_verified_at'] == null
           ? null
-          : DateTime.parse(json['emailVerifiedAt'] as String),
-  profilePicUrl: json['profilePicUrl'] as String,
+          : DateTime.parse(json['email_verified_at'] as String),
+  profilePicUrl: json['profile_pic_url'] as String,
   roles: (json['roles'] as List<dynamic>).map((e) => e as String).toList(),
   permissions:
       (json['permissions'] as List<dynamic>).map((e) => e as String).toList(),
@@ -27,11 +27,11 @@ Map<String, dynamic> _$UserToJson(_User instance) => <String, dynamic>{
   'id': instance.id,
   'firstname': instance.firstname,
   'lastname': instance.lastname,
-  'phoneNumber': instance.phoneNumber,
+  'phone_number': instance.phoneNumber,
   'nationality': instance.nationality,
-  'emailVerified': instance.emailVerified,
-  'emailVerifiedAt': instance.emailVerifiedAt?.toIso8601String(),
-  'profilePicUrl': instance.profilePicUrl,
+  'email_verified': instance.emailVerified,
+  'email_verified_at': instance.emailVerifiedAt?.toIso8601String(),
+  'profile_pic_url': instance.profilePicUrl,
   'roles': instance.roles,
   'permissions': instance.permissions,
 };

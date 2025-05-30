@@ -61,9 +61,10 @@ class LoginNotifier extends StateNotifier<State<LoginResponse>> {
     state = const State.loading();
     try {
       final response = await _authService.login(request);
+      print(response);
       state = State.success(response);
     } catch (e) {
-      state = State.error(e as Exception);
+      state = State.error(Exception(e.toString()));
     }
   }
 }

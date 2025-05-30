@@ -11,11 +11,17 @@ abstract class Schedule with _$Schedule {
     required String origin,
     required String price,
     required String destination,
+    @JsonKey(name: "departure_time")
     required DateTime departureTime,
+    @JsonKey(name: "arrival_time")
     required DateTime arrivalTime,
+    @JsonKey(name: "total_seats")
     required int totalSeats,
+    @JsonKey(name: "available_seats")
     required int availableSeats,
+    @JsonKey(name: "created_at")
     required DateTime createdAt,
+    @JsonKey(name: "updated_at")
     required DateTime updatedAt,
   }) = _Schedule;
 
