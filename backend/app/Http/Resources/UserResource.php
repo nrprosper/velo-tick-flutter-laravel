@@ -19,9 +19,11 @@ class UserResource extends JsonResource
             'firstname' => $this->firstname,
             'lastname' => $this->lastname,
             'email' => $this->email,
+            'profile_pic_url' => $this->profile_pic_url,
             'phone_number' => $this->phone_number,
             'nationality' => $this->nationality,
             'roles' => RoleResource::collection($this->roles),
+            'permissions' => $this->permissions,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
