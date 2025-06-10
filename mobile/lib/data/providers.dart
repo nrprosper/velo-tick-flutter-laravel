@@ -6,6 +6,7 @@ import 'package:mobile/data/requests/login_request.dart';
 import 'package:mobile/data/requests/sign_up_request.dart';
 import 'package:mobile/data/responses/login_response.dart';
 import 'package:mobile/data/responses/my_ticket_response.dart';
+import 'package:mobile/data/responses/profile.dart';
 import 'package:mobile/data/responses/schedules_response.dart';
 import 'package:mobile/data/responses/signup_response.dart';
 import 'package:mobile/data/responses/single_schedule_response.dart';
@@ -61,7 +62,6 @@ class LoginNotifier extends StateNotifier<State<LoginResponse>> {
     state = const State.loading();
     try {
       final response = await _authService.login(request);
-      print(response);
       state = State.success(response);
     } catch (e) {
       state = State.error(Exception(e.toString()));
@@ -75,6 +75,55 @@ StateNotifierProvider<LoginNotifier, State<LoginResponse>>((ref) {
   final authService = ref.watch(authServiceProvider);
   return LoginNotifier(authService);
 });
+
+class ProfileNotifier extends StateNotifier<State<ProfileResponse>> {
+  final AuthService _authService;
+
+  ProfileNotifier(this._authService) : super(const State.init()) {
+    fetchProfile();
+  }
+
+  Future<void> fetchProfile() async {
+    state = const State.loading();
+    try {
+      final response = await _authService.me();
+      state = State.success(response);
+    } catch (e) {
+      state = State.error(Exception(e.toString()));
+    }
+  }
+}
+
+/// Provides the ProfileNotifier.
+final profileNotifierProvider =
+StateNotifierProvider.autoDispose<ProfileNotifier, State<ProfileResponse>>((ref) {
+  final authService = ref.watch(authServiceProvider);
+  return ProfileNotifier(authService);
+});
+
+
+class LogoutNotifier extends StateNotifier<State<Object?>> {
+  final AuthService _authService;
+
+  LogoutNotifier(this._authService) : super(const State.init());
+
+  Future<void> logout() async {
+    state = const State.loading();
+    try {
+      await _authService.logout();
+      state = const State.success(null);
+    } catch (e) {
+      state = State.error(e as Exception);
+    }
+  }
+}
+
+final logoutNotifierProvider =
+StateNotifierProvider<LogoutNotifier, State<Object?>>((ref) {
+  final authService = ref.watch(authServiceProvider);
+  return LogoutNotifier(authService);
+});
+
 
 // Ticket and Schedule Notifiers
 
@@ -90,7 +139,7 @@ class SchedulesNotifier extends StateNotifier<State<SchedulesResponse>> {
       final response = await _service.getAllSchedules();
       state = State.success(response);
     } catch (e) {
-      state = State.error(e as Exception);
+      state = State.error(Exception(e.toString()));
     }
   }
 }
@@ -114,7 +163,7 @@ class MyTicketsNotifier extends StateNotifier<State<MyTicketResponse>> {
       final response = await _service.myTickets();
       state = State.success(response);
     } catch (e) {
-      state = State.error(e as Exception);
+      state = State.error(Exception(e.toString()));
     }
   }
 }
@@ -142,7 +191,7 @@ class ScheduleDetailNotifier
       final response = await _service.getSchedule(_id);
       state = State.success(response);
     } catch (e) {
-      state = State.error(e as Exception);
+      state = State.error(Exception(e.toString()));
     }
   }
 }

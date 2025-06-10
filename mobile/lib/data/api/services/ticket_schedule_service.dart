@@ -24,7 +24,9 @@ class TicketScheduleService {
 
   Future<SingleScheduleResponse> getSchedule(int id) {
     return _dio.get('/schedules/$id').then((res) {
-      return SingleScheduleResponse.fromJson(res.data);
+      var response = res.data;
+      final wrapper = ScheduleResponseWrapper.fromJson(response);
+      return wrapper.data;
     });
   }
 

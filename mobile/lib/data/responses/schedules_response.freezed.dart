@@ -318,7 +318,7 @@ as bool,
 /// @nodoc
 mixin _$Meta {
 
- int get currentPage; int get from; int get lastPage; List<Link> get links; String get path; int get perPage; int get to; int get total;
+@JsonKey(name: "current_page") int get currentPage; int get from;@JsonKey(name: "last_page") int get lastPage; List<Link> get links; String get path;@JsonKey(name: "per_page") int get perPage; int get to; int get total;
 /// Create a copy of Meta
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -351,7 +351,7 @@ abstract mixin class $MetaCopyWith<$Res>  {
   factory $MetaCopyWith(Meta value, $Res Function(Meta) _then) = _$MetaCopyWithImpl;
 @useResult
 $Res call({
- int currentPage, int from, int lastPage, List<Link> links, String path, int perPage, int to, int total
+@JsonKey(name: "current_page") int currentPage, int from,@JsonKey(name: "last_page") int lastPage, List<Link> links, String path,@JsonKey(name: "per_page") int perPage, int to, int total
 });
 
 
@@ -389,12 +389,12 @@ as int,
 @JsonSerializable()
 
 class _Meta implements Meta {
-  const _Meta({required this.currentPage, required this.from, required this.lastPage, required final  List<Link> links, required this.path, required this.perPage, required this.to, required this.total}): _links = links;
+  const _Meta({@JsonKey(name: "current_page") required this.currentPage, required this.from, @JsonKey(name: "last_page") required this.lastPage, required final  List<Link> links, required this.path, @JsonKey(name: "per_page") required this.perPage, required this.to, required this.total}): _links = links;
   factory _Meta.fromJson(Map<String, dynamic> json) => _$MetaFromJson(json);
 
-@override final  int currentPage;
+@override@JsonKey(name: "current_page") final  int currentPage;
 @override final  int from;
-@override final  int lastPage;
+@override@JsonKey(name: "last_page") final  int lastPage;
  final  List<Link> _links;
 @override List<Link> get links {
   if (_links is EqualUnmodifiableListView) return _links;
@@ -403,7 +403,7 @@ class _Meta implements Meta {
 }
 
 @override final  String path;
-@override final  int perPage;
+@override@JsonKey(name: "per_page") final  int perPage;
 @override final  int to;
 @override final  int total;
 
@@ -440,7 +440,7 @@ abstract mixin class _$MetaCopyWith<$Res> implements $MetaCopyWith<$Res> {
   factory _$MetaCopyWith(_Meta value, $Res Function(_Meta) _then) = __$MetaCopyWithImpl;
 @override @useResult
 $Res call({
- int currentPage, int from, int lastPage, List<Link> links, String path, int perPage, int to, int total
+@JsonKey(name: "current_page") int currentPage, int from,@JsonKey(name: "last_page") int lastPage, List<Link> links, String path,@JsonKey(name: "per_page") int perPage, int to, int total
 });
 
 

@@ -44,3 +44,13 @@ abstract class SingleScheduleResponse with _$SingleScheduleResponse {
   factory SingleScheduleResponse.fromJson(Map<String, dynamic> json) =>
       _$SingleScheduleResponseFromJson(json);
 }
+
+@freezed
+abstract class ScheduleResponseWrapper with _$ScheduleResponseWrapper {
+  const factory ScheduleResponseWrapper({
+    required SingleScheduleResponse data,
+  }) = _ScheduleResponseWrapper;
+
+  factory ScheduleResponseWrapper.fromJson(Map<String, dynamic> json) =>
+      _$ScheduleResponseWrapperFromJson(json);
+}

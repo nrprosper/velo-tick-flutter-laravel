@@ -56,3 +56,13 @@ Map<String, dynamic> _$SingleScheduleResponseToJson(
   'created_at': instance.createdAt.toIso8601String(),
   'updated_at': instance.updatedAt.toIso8601String(),
 };
+
+_ScheduleResponseWrapper _$ScheduleResponseWrapperFromJson(
+  Map<String, dynamic> json,
+) => _ScheduleResponseWrapper(
+  data: SingleScheduleResponse.fromJson(json['data'] as Map<String, dynamic>),
+);
+
+Map<String, dynamic> _$ScheduleResponseWrapperToJson(
+  _ScheduleResponseWrapper instance,
+) => <String, dynamic>{'data': instance.data};

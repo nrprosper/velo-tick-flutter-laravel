@@ -43,11 +43,14 @@ abstract class Link with _$Link {
 @freezed
 abstract class Meta with _$Meta {
   const factory Meta({
+    @JsonKey(name: "current_page")
     required int currentPage,
     required int from,
+    @JsonKey(name: "last_page")
     required int lastPage,
     required List<Link> links,
     required String path,
+    @JsonKey(name: "per_page")
     required int perPage,
     required int to,
     required int total,

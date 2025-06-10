@@ -47,26 +47,26 @@ Map<String, dynamic> _$LinkToJson(_Link instance) => <String, dynamic>{
 };
 
 _Meta _$MetaFromJson(Map<String, dynamic> json) => _Meta(
-  currentPage: (json['currentPage'] as num).toInt(),
+  currentPage: (json['current_page'] as num).toInt(),
   from: (json['from'] as num).toInt(),
-  lastPage: (json['lastPage'] as num).toInt(),
+  lastPage: (json['last_page'] as num).toInt(),
   links:
       (json['links'] as List<dynamic>)
           .map((e) => Link.fromJson(e as Map<String, dynamic>))
           .toList(),
   path: json['path'] as String,
-  perPage: (json['perPage'] as num).toInt(),
+  perPage: (json['per_page'] as num).toInt(),
   to: (json['to'] as num).toInt(),
   total: (json['total'] as num).toInt(),
 );
 
 Map<String, dynamic> _$MetaToJson(_Meta instance) => <String, dynamic>{
-  'currentPage': instance.currentPage,
+  'current_page': instance.currentPage,
   'from': instance.from,
-  'lastPage': instance.lastPage,
+  'last_page': instance.lastPage,
   'links': instance.links,
   'path': instance.path,
-  'perPage': instance.perPage,
+  'per_page': instance.perPage,
   'to': instance.to,
   'total': instance.total,
 };

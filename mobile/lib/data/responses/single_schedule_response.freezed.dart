@@ -323,4 +323,155 @@ as DateTime,
 
 }
 
+
+/// @nodoc
+mixin _$ScheduleResponseWrapper {
+
+ SingleScheduleResponse get data;
+/// Create a copy of ScheduleResponseWrapper
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$ScheduleResponseWrapperCopyWith<ScheduleResponseWrapper> get copyWith => _$ScheduleResponseWrapperCopyWithImpl<ScheduleResponseWrapper>(this as ScheduleResponseWrapper, _$identity);
+
+  /// Serializes this ScheduleResponseWrapper to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ScheduleResponseWrapper&&(identical(other.data, data) || other.data == data));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,data);
+
+@override
+String toString() {
+  return 'ScheduleResponseWrapper(data: $data)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $ScheduleResponseWrapperCopyWith<$Res>  {
+  factory $ScheduleResponseWrapperCopyWith(ScheduleResponseWrapper value, $Res Function(ScheduleResponseWrapper) _then) = _$ScheduleResponseWrapperCopyWithImpl;
+@useResult
+$Res call({
+ SingleScheduleResponse data
+});
+
+
+$SingleScheduleResponseCopyWith<$Res> get data;
+
+}
+/// @nodoc
+class _$ScheduleResponseWrapperCopyWithImpl<$Res>
+    implements $ScheduleResponseWrapperCopyWith<$Res> {
+  _$ScheduleResponseWrapperCopyWithImpl(this._self, this._then);
+
+  final ScheduleResponseWrapper _self;
+  final $Res Function(ScheduleResponseWrapper) _then;
+
+/// Create a copy of ScheduleResponseWrapper
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? data = null,}) {
+  return _then(_self.copyWith(
+data: null == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
+as SingleScheduleResponse,
+  ));
+}
+/// Create a copy of ScheduleResponseWrapper
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$SingleScheduleResponseCopyWith<$Res> get data {
+  
+  return $SingleScheduleResponseCopyWith<$Res>(_self.data, (value) {
+    return _then(_self.copyWith(data: value));
+  });
+}
+}
+
+
+/// @nodoc
+@JsonSerializable()
+
+class _ScheduleResponseWrapper implements ScheduleResponseWrapper {
+  const _ScheduleResponseWrapper({required this.data});
+  factory _ScheduleResponseWrapper.fromJson(Map<String, dynamic> json) => _$ScheduleResponseWrapperFromJson(json);
+
+@override final  SingleScheduleResponse data;
+
+/// Create a copy of ScheduleResponseWrapper
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ScheduleResponseWrapperCopyWith<_ScheduleResponseWrapper> get copyWith => __$ScheduleResponseWrapperCopyWithImpl<_ScheduleResponseWrapper>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$ScheduleResponseWrapperToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ScheduleResponseWrapper&&(identical(other.data, data) || other.data == data));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,data);
+
+@override
+String toString() {
+  return 'ScheduleResponseWrapper(data: $data)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ScheduleResponseWrapperCopyWith<$Res> implements $ScheduleResponseWrapperCopyWith<$Res> {
+  factory _$ScheduleResponseWrapperCopyWith(_ScheduleResponseWrapper value, $Res Function(_ScheduleResponseWrapper) _then) = __$ScheduleResponseWrapperCopyWithImpl;
+@override @useResult
+$Res call({
+ SingleScheduleResponse data
+});
+
+
+@override $SingleScheduleResponseCopyWith<$Res> get data;
+
+}
+/// @nodoc
+class __$ScheduleResponseWrapperCopyWithImpl<$Res>
+    implements _$ScheduleResponseWrapperCopyWith<$Res> {
+  __$ScheduleResponseWrapperCopyWithImpl(this._self, this._then);
+
+  final _ScheduleResponseWrapper _self;
+  final $Res Function(_ScheduleResponseWrapper) _then;
+
+/// Create a copy of ScheduleResponseWrapper
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? data = null,}) {
+  return _then(_ScheduleResponseWrapper(
+data: null == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
+as SingleScheduleResponse,
+  ));
+}
+
+/// Create a copy of ScheduleResponseWrapper
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$SingleScheduleResponseCopyWith<$Res> get data {
+  
+  return $SingleScheduleResponseCopyWith<$Res>(_self.data, (value) {
+    return _then(_self.copyWith(data: value));
+  });
+}
+}
+
 // dart format on
