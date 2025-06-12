@@ -4,6 +4,7 @@ import 'package:mobile/data/api/services/auth_service.dart';
 import 'package:mobile/data/api/services/ticket_schedule_service.dart';
 import 'package:mobile/data/requests/login_request.dart';
 import 'package:mobile/data/requests/sign_up_request.dart';
+import 'package:mobile/data/responses/buy_ticket_response.dart';
 import 'package:mobile/data/responses/login_response.dart';
 import 'package:mobile/data/responses/my_ticket_response.dart';
 import 'package:mobile/data/responses/profile.dart';
@@ -194,6 +195,7 @@ class ScheduleDetailNotifier
       state = State.error(Exception(e.toString()));
     }
   }
+
 }
 
 /// Provides the ScheduleDetailNotifier as a family provider with autoDispose.
@@ -203,4 +205,26 @@ final scheduleDetailNotifierProvider = StateNotifierProvider.autoDispose.family<
     int>((ref, id) {
   final service = ref.watch(ticketScheduleServiceProvider);
   return ScheduleDetailNotifier(service, id);
+});
+
+
+
+class BuyTicketNotifier extends StateNotifier<State<BuyTicketResponse>> {
+  final TicketScheduleService _service;
+  BuyTicketNotifier(this._service) : super(const State.init());
+
+  Future<void> buyTicket(int scheduleId, int seatId) async {
+    state = const State.loading();
+    try {
+      final ticket = await _service.buyTicket(scheduleId, seatId);
+      state = State.success(ticket);
+    } catch (e) {
+      state = State.error(Exception(e.toString()));
+    }
+  }
+}
+
+final buyTicketNotifierProvider = StateNotifierProvider.autoDispose<BuyTicketNotifier, State<BuyTicketResponse>>((ref) {
+  final service = ref.watch(ticketScheduleServiceProvider);
+  return BuyTicketNotifier(service);
 });
