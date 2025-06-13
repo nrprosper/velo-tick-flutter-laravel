@@ -1,20 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:mobile/data/responses/schedules_response.dart';
 import 'package:mobile/screens/schedule_details_screen.dart';
 import 'package:mobile/utils/colors.dart';
 import 'package:mobile/widgets/routeline_with_arrow.dart';
 
 class TicketCard extends StatelessWidget {
-  const TicketCard({super.key});
+  final Schedule schedule;
+
+  const TicketCard({super.key, required this.schedule});
 
   @override
   Widget build(BuildContext context) {
+    final departureTime = DateFormat('h:mm a').format(schedule.departureTime);
+    final arrivalTime = DateFormat('h:mm a').format(schedule.arrivalTime);
+    final duration = schedule.arrivalTime.difference(schedule.departureTime);
+    final hours = duration.inHours;
+    final minutes = duration.inMinutes % 60;
+    final durationText = '$hours h $minutes m';
+
     return GestureDetector(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => ScheduleDetailsScreen()));
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ScheduleDetailsScreen(scheduleId: schedule.id),
+          ),
+        );
       },
       child: Card(
         child: Padding(
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -31,19 +47,13 @@ class TicketCard extends StatelessWidget {
                     child: const Icon(Icons.confirmation_num, color: Colors.white),
                   ),
                   const SizedBox(width: 12),
-                  // Travel Info
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
+                      children: [
                         Text(
-                          "RAB 123 C",
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                        ),
-                        SizedBox(height: 4),
-                        Text(
-                          "Rukundo Prosper",
-                          style: TextStyle(color: Colors.grey, fontSize: 13),
+                          schedule.bus,
+                          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                         ),
                       ],
                     ),
@@ -51,63 +61,56 @@ class TicketCard extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      const Text(
-                        "20000 RWF",
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                      Text(
+                        schedule.price,
+                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                       ),
                       const SizedBox(height: 4),
                       Text(
-                        "13 seats left",
+                        '${schedule.availableSeats} seats left',
                         style: TextStyle(color: DColors.success6, fontSize: 13),
                       ),
                     ],
                   ),
                 ],
               ),
-
               const SizedBox(height: 20),
-
               // Route Details
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // Departure
-                  const Column(
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Kigali", style: TextStyle(fontWeight: FontWeight.bold)),
-                      SizedBox(height: 4),
-                      Text("1.00 am", style: TextStyle(color: Colors.grey)),
+                      Text(schedule.origin, style: const TextStyle(fontWeight: FontWeight.bold)),
+                      const SizedBox(height: 4),
+                      Text(departureTime, style: const TextStyle(color: Colors.grey)),
                     ],
                   ),
-
-                  // Duration + Dashed Line
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Column(
-                        children: const [
+                        children: [
                           Text(
-                            "9h 30m",
-                            style: TextStyle(
+                            durationText,
+                            style: const TextStyle(
                               fontSize: 13,
                               color: Colors.grey,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          RouteLineWithArrow(),
+                          const RouteLineWithArrow(),
                         ],
                       ),
                     ),
                   ),
-
-                  // Arrival
-                  const Column(
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Text("Uganda", style: TextStyle(fontWeight: FontWeight.bold)),
-                      SizedBox(height: 4),
-                      Text("6.30 am", style: TextStyle(color: Colors.grey)),
+                      Text(schedule.destination, style: const TextStyle(fontWeight: FontWeight.bold)),
+                      const SizedBox(height: 4),
+                      Text(arrivalTime, style: const TextStyle(color: Colors.grey)),
                     ],
                   ),
                 ],
