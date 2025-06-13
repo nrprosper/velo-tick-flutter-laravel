@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:mobile/screens/explore_screen.dart';
 import 'package:mobile/screens/home_screen.dart';
+import 'package:mobile/screens/my_tickets.dart';
+import 'package:mobile/screens/profile_screen.dart';
 import 'package:mobile/utils/colors.dart';
 
 class Layout extends StatefulWidget {
@@ -34,9 +37,9 @@ class _LayoutState extends State<Layout> {
       ),
       body: <Widget> [
         const HomeScreen(),
-        const Center(child: Text('My Tickets')),
-        const Center(child: Text('Explore')),
-        const Center(child: Text('Profile')),
+        const Center(child: MyTickets()),
+        const Center(child: ExploreScreen()),
+        const Center(child: ProfileScreen()),
       ] [_currentPageIndex],
     );
   }
