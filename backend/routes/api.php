@@ -85,6 +85,7 @@ Route::prefix('v1') -> group(function () {
         Route::post('/tickets/buy', [TicketController::class, 'buyTicket']);
         Route::get('/tickets/mytickets', [TicketController::class, 'myTickets']);
         Route::delete('/tickets/{ticket}', [TicketController::class, 'destroy']);
+        Route::post('/tickets/verify', [TicketController::class, 'verifyTicket']);
     });
 
     Route::get('/schedules', [ScheduleController::class, 'all']);

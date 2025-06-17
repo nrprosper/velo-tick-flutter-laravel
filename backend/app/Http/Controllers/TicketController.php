@@ -132,4 +132,21 @@ class TicketController extends Controller
         return response()->json(null, 204);
     }
 
+    public function verifyTicket(Request $request): JsonResponse
+    {
+        $request->validate([
+            'encrypted_ticket' => 'required|string',
+        ]);
+
+        $encryptedTicket = $request->input('encrypted_ticket');
+        try {
+            $ticketId = decrypt($encryptedTicket);
+            $ticket = Ticket::with(['user', 'schedule', 'seat'])->findOrFail($ticketId);
+            return response()->json(new MyTicketResourse($ticket));
+        } catch (\Exception $e) {
+            Log::error('Ticket verification failed: ' . $e->getMessage());
+            return response()->json(['error' => 'Invalid ticket'], 400);
+        }
+    }
+
 }
