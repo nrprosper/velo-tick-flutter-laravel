@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:mobile/utils/colors.dart';
 
 class AuthLayout extends StatelessWidget {
-  final List<Widget> elements;
+  final Widget child;
   final String description;
-  const AuthLayout({super.key, required this.elements, required this.description});
+  const AuthLayout({super.key, required this.child, required this.description});
 
   @override
   Widget build(BuildContext context) {
@@ -42,12 +42,7 @@ class AuthLayout extends StatelessWidget {
                             color: DColors.neutral5
                         ),
                       ),
-                      Form(
-                        child: Column(
-                          spacing: 20.0,
-                          children: elements,
-                        ),
-                      ),
+                      child,
                     ],
                   ),
                 ),
