@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SignUpRequest {
 
- String get firstname; String get lastname; String get email; String get password; String get passwordConfirmation; String get phoneNumber; String get nationality;
+ String get firstname; String get lastname; String get email; String get password;@JsonKey(name: 'password_confirmation') String get passwordConfirmation;@JsonKey(name: 'phone_number') String get phoneNumber; String get nationality;
 /// Create a copy of SignUpRequest
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -49,7 +49,7 @@ abstract mixin class $SignUpRequestCopyWith<$Res>  {
   factory $SignUpRequestCopyWith(SignUpRequest value, $Res Function(SignUpRequest) _then) = _$SignUpRequestCopyWithImpl;
 @useResult
 $Res call({
- String firstname, String lastname, String email, String password, String passwordConfirmation, String phoneNumber, String nationality
+ String firstname, String lastname, String email, String password,@JsonKey(name: 'password_confirmation') String passwordConfirmation,@JsonKey(name: 'phone_number') String phoneNumber, String nationality
 });
 
 
@@ -86,15 +86,15 @@ as String,
 @JsonSerializable()
 
 class _SignUpRequest implements SignUpRequest {
-  const _SignUpRequest({required this.firstname, required this.lastname, required this.email, required this.password, required this.passwordConfirmation, required this.phoneNumber, required this.nationality});
+  const _SignUpRequest({required this.firstname, required this.lastname, required this.email, required this.password, @JsonKey(name: 'password_confirmation') required this.passwordConfirmation, @JsonKey(name: 'phone_number') required this.phoneNumber, required this.nationality});
   factory _SignUpRequest.fromJson(Map<String, dynamic> json) => _$SignUpRequestFromJson(json);
 
 @override final  String firstname;
 @override final  String lastname;
 @override final  String email;
 @override final  String password;
-@override final  String passwordConfirmation;
-@override final  String phoneNumber;
+@override@JsonKey(name: 'password_confirmation') final  String passwordConfirmation;
+@override@JsonKey(name: 'phone_number') final  String phoneNumber;
 @override final  String nationality;
 
 /// Create a copy of SignUpRequest
@@ -130,7 +130,7 @@ abstract mixin class _$SignUpRequestCopyWith<$Res> implements $SignUpRequestCopy
   factory _$SignUpRequestCopyWith(_SignUpRequest value, $Res Function(_SignUpRequest) _then) = __$SignUpRequestCopyWithImpl;
 @override @useResult
 $Res call({
- String firstname, String lastname, String email, String password, String passwordConfirmation, String phoneNumber, String nationality
+ String firstname, String lastname, String email, String password,@JsonKey(name: 'password_confirmation') String passwordConfirmation,@JsonKey(name: 'phone_number') String phoneNumber, String nationality
 });
 
 

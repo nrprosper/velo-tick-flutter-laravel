@@ -12,8 +12,8 @@ _SignUpRequest _$SignUpRequestFromJson(Map<String, dynamic> json) =>
       lastname: json['lastname'] as String,
       email: json['email'] as String,
       password: json['password'] as String,
-      passwordConfirmation: json['passwordConfirmation'] as String,
-      phoneNumber: json['phoneNumber'] as String,
+      passwordConfirmation: json['password_confirmation'] as String,
+      phoneNumber: json['phone_number'] as String,
       nationality: json['nationality'] as String,
     );
 
@@ -23,7 +23,7 @@ Map<String, dynamic> _$SignUpRequestToJson(_SignUpRequest instance) =>
       'lastname': instance.lastname,
       'email': instance.email,
       'password': instance.password,
-      'passwordConfirmation': instance.passwordConfirmation,
-      'phoneNumber': instance.phoneNumber,
+      'password_confirmation': instance.passwordConfirmation,
+      'phone_number': instance.phoneNumber,
       'nationality': instance.nationality,
     };
