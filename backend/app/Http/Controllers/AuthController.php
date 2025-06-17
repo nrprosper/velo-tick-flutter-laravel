@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
@@ -16,24 +17,31 @@ class AuthController extends Controller
     /**
      * @throws ValidationException
      */
-    public function signup(Request $request): UserResource {
+    public function signup(Request $request): UserResource
+    {
         $this->validate($request, [
             'firstname' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
-            'phone_number' => 'required|string',
+            'phone_number' => [
+                'required',
+                'string',
+                'regex:/^\+\d{9,15}$/',
+                'unique:users,phone_number',
+            ],
             'nationality' => 'required|string',
         ]);
 
         $input = $request->all();
         $input['password'] = Hash::make($request->input('password'));
+
         $user = User::create($input);
         $user->assignRole('user');
 
         return UserResource::make($user);
-
     }
+
 
     /**
      * @throws ValidationException
