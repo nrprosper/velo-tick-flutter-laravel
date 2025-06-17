@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/screens/auth/register_screen.dart';
 import 'package:mobile/screens/layout.dart';
 import 'package:mobile/utils/colors.dart';
 import 'package:mobile/utils/text.dart';
@@ -62,7 +63,12 @@ class OnbordingScreen extends StatelessWidget {
                     height: 50,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Layout()));
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => RegisterScreen(),
+                          ),
+                        );
                       },
                       style: ButtonStyle(
                         backgroundColor: WidgetStateProperty.all(

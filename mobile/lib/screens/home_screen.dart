@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:mobile/atoms/home_search.dart';
+import 'package:mobile/atoms/recent_activity.dart';
 import 'package:mobile/utils/colors.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -44,14 +45,17 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(height: 30),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 18.0),
-              child: HomeSearch (),
-            ),
-          ],
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 30),
+              HomeSearch(),
+              SizedBox(height: 30),
+              RecentActivity(),
+            ],
+          ),
         ),
       ),
     );

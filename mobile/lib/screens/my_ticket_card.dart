@@ -11,6 +11,7 @@ class MyTicketCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final departureTime = DateFormat('h:mm a').format(ticket.departureTime);
+    final departureDate = DateFormat('yyyy-MM-dd').format(ticket.departureTime);
     final arrivalTime = DateFormat('h:mm a').format(ticket.arrivalTime);
     final duration = ticket.arrivalTime.difference(ticket.departureTime);
     final hours = duration.inHours;
@@ -75,6 +76,7 @@ class MyTicketCard extends StatelessWidget {
                             fontSize: 16,
                           ),
                         ),
+                        Text(departureDate)
                       ],
                     ),
                   ),
