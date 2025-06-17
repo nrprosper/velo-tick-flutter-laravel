@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\PermissionController;
 use App\Http\Controllers\Auth\RoleController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BusController;
+use App\Http\Controllers\LocationsController;
 use App\Http\Controllers\RouteController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\TicketController;
@@ -89,5 +90,10 @@ Route::prefix('v1') -> group(function () {
     });
 
     Route::get('/schedules', [ScheduleController::class, 'all']);
+
+    Route::prefix('locations')->group(function () {
+        Route::get('/origins', [LocationsController::class, 'getOrigins']);
+        Route::get('/destinations', [LocationsController::class, 'getDestinations']);
+    });
 
 });
