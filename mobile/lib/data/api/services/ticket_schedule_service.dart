@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:intl/intl.dart';
 import 'package:mobile/data/api/api_client.dart';
 import 'package:mobile/data/responses/buy_ticket_response.dart';
 import 'package:mobile/data/responses/my_ticket_response.dart';
@@ -9,10 +10,20 @@ class TicketScheduleService {
   final Dio _dio;
   TicketScheduleService({required ApiClient apiClient}) : _dio = apiClient.dio;
 
-  Future<SchedulesResponse> getAllSchedules() {
-    return _dio.get('/schedules').then((res) {
-      return SchedulesResponse.fromJson(res.data);
-    });
+  Future<SchedulesResponse> getAllSchedules({
+    String? origin,
+    String? destination,
+    DateTime? date,
+    int perPage = 10,
+  }) {
+    final query = <String, dynamic>{ 'per_page': perPage };
+    if (origin != null)      query['origin']      = origin;
+    if (destination != null) query['destination'] = destination;
+    if (date != null)        query['date']        = DateFormat('yyyy-MM-dd').format(date);
+
+    return _dio
+        .get('/schedules', queryParameters: query)
+        .then((res) => SchedulesResponse.fromJson(res.data));
   }
 
 
@@ -40,6 +51,24 @@ class TicketScheduleService {
 
     return BuyTicketResponse.fromJson(response.data);
 
+  }
+
+  Future<MyTicketResponse> verifyTicket(String encryptedTicket) async {
+    final response = await _dio.post('/tickets/verify', data: {
+      'encrypted_ticket': encryptedTicket,
+    });
+
+    return MyTicketResponse.fromJson(response.data);
+  }
+
+  Future<List<String>> getOrigins() async {
+    final response = await _dio.get('/locations/origins');
+    return List<String>.from(response.data);
+  }
+
+  Future<List<String>> getDestinations() async {
+    final response = await _dio.get('/locations/destinations');
+    return List<String>.from(response.data);
   }
 
 }

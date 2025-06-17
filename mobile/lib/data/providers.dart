@@ -97,7 +97,7 @@ class ProfileNotifier extends StateNotifier<State<ProfileResponse>> {
 
 /// Provides the ProfileNotifier.
 final profileNotifierProvider =
-StateNotifierProvider.autoDispose<ProfileNotifier, State<ProfileResponse>>((ref) {
+StateNotifierProvider<ProfileNotifier, State<ProfileResponse>>((ref) {
   final authService = ref.watch(authServiceProvider);
   return ProfileNotifier(authService);
 });
@@ -134,10 +134,18 @@ class SchedulesNotifier extends StateNotifier<State<SchedulesResponse>> {
 
   SchedulesNotifier(this._service) : super(const State.init());
 
-  Future<void> fetchSchedules() async {
+  Future<void> fetchSchedules({
+    String? origin,
+    String? destination,
+    DateTime? date,
+  }) async {
     state = const State.loading();
     try {
-      final response = await _service.getAllSchedules();
+      final response = await _service.getAllSchedules(
+        origin: origin,
+        destination: destination,
+        date: date,
+      );
       state = State.success(response);
     } catch (e) {
       state = State.error(Exception(e.toString()));
@@ -146,8 +154,7 @@ class SchedulesNotifier extends StateNotifier<State<SchedulesResponse>> {
 }
 
 /// Provides the SchedulesNotifier.
-final schedulesNotifierProvider =
-StateNotifierProvider<SchedulesNotifier, State<SchedulesResponse>>((ref) {
+final schedulesNotifierProvider = StateNotifierProvider.autoDispose<SchedulesNotifier, State<SchedulesResponse>>((ref) {
   final service = ref.watch(ticketScheduleServiceProvider);
   return SchedulesNotifier(service);
 });
@@ -227,4 +234,71 @@ class BuyTicketNotifier extends StateNotifier<State<BuyTicketResponse>> {
 final buyTicketNotifierProvider = StateNotifierProvider.autoDispose<BuyTicketNotifier, State<BuyTicketResponse>>((ref) {
   final service = ref.watch(ticketScheduleServiceProvider);
   return BuyTicketNotifier(service);
+});
+
+
+class VerifyTicketNotifier extends StateNotifier<State<MyTicketResponse>> {
+  final TicketScheduleService _service;
+  VerifyTicketNotifier(this._service) : super(const State.init());
+  Future<void> verifyTicket(String encryptedTicket) async {
+    state = const State.loading();
+    try {
+      final ticket = await _service.verifyTicket(encryptedTicket);
+      state = State.success(ticket);
+    } catch (e) {
+      state = State.error(Exception(e.toString()));
+    }
+  }
+}
+
+final verifyTicketNotifierProvider = StateNotifierProvider.autoDispose<VerifyTicketNotifier, State<MyTicketResponse>>((ref) {
+  final service = ref.watch(ticketScheduleServiceProvider);
+  return VerifyTicketNotifier(service);
+});
+
+class OriginsNotifier extends StateNotifier<State<List<String>>> {
+  final TicketScheduleService _service;
+
+  OriginsNotifier(this._service) : super(const State.init()) {
+    fetchOrigins();
+  }
+
+  Future<void> fetchOrigins() async {
+    state = const State.loading();
+    try {
+      final origins = await _service.getOrigins();
+      state = State.success(origins);
+    } catch (e) {
+      state = State.error(Exception(e.toString()));
+    }
+  }
+
+}
+
+final originsNotifierProvider = StateNotifierProvider<OriginsNotifier, State<List<String>>>((ref) {
+  final service = ref.watch(ticketScheduleServiceProvider);
+  return OriginsNotifier(service);
+});
+
+class DestinationsNotifier extends StateNotifier<State<List<String>>> {
+  final TicketScheduleService _service;
+
+  DestinationsNotifier(this._service) : super(const State.init()) {
+    fetchDestinations();
+  }
+
+  Future<void> fetchDestinations() async {
+    state = const State.loading();
+    try {
+      final destinations = await _service.getDestinations();
+      state = State.success(destinations);
+    } catch (e) {
+      state = State.error(Exception(e.toString()));
+    }
+  }
+}
+
+final destinationsNotifierProvider = StateNotifierProvider<DestinationsNotifier, State<List<String>>>((ref) {
+  final service = ref.watch(ticketScheduleServiceProvider);
+  return DestinationsNotifier(service);
 });
